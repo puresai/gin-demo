@@ -1,3 +1,6 @@
+/**
+go并发，注意资源竞争
+*/
 package main
 
 import (

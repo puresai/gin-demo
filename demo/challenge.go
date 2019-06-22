@@ -1,15 +1,18 @@
+/**
+goroutine资源竞争，锁的使用
+*/
 package main
 
 import (
 	"fmt"
 	"runtime"
 	"sync"
-	"sync/atomic"
 )
 
 var (
 	count int32
 	wg sync.WaitGroup
+	mt sync.Mutex
 )
 
 func main() {
@@ -23,10 +26,12 @@ func main() {
 
 func incCount() {
 	defer wg.Done()
-	for i:=0;i<2;i++ {
-		value := atomic.LoadInt32(&count)
+	for i:=0;i<5;i++ {
+		mt.Lock()
+		value := count
 		runtime.Gosched()
 		value++
-		atomic.StoreInt32(&count, value)
+		count = value
+		mt.Unlock()
 	}
 }
