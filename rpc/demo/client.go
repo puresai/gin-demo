@@ -14,10 +14,9 @@ func main() {
     //连接远程rpc服务
     rpc, err := rpc.DialHTTP("tcp", "127.0.0.1:8099");
     if err != nil {
-        log.Fatal(err);
+       log.Fatal(err);
     }
 	ret := 0;
-	fmt.Println(*&ret);
     //调用远程方法
     //注意第三个参数是指针类型
     err2 := rpc.Call("Rect.Area", Params{50, 100}, &ret);
