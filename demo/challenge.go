@@ -1,5 +1,6 @@
 /**
 goroutine资源竞争，锁的使用
+统一资源的读写必须是原子性的
 */
 package main
 
